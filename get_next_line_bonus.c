@@ -6,7 +6,7 @@
 /*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:48:58 by ajbari            #+#    #+#             */
-/*   Updated: 2024/02/28 20:53:08 by ajbari           ###   ########.fr       */
+/*   Updated: 2024/02/29 14:01:03 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,43 +102,19 @@ char	*get_next_line(int fd)
 	static char	*line[OPEN_MAX];
 	char		*new_line;
 
-	if (fd < 0 || read(fd, NULL, 0) == -1 || BUFFER_SIZE <= 0)
-	{
-		free(line[fd]);
-		line[fd] = NULL;
-		return (NULL);
-	}
+	new_line = NULL;
+	if (fd < 0)
+		return NULL;
+	if ( BUFFER_SIZE <= 0 || read(fd, new_line, 0))
+		return ft_free(&line[fd]);
 	ft_read(fd, &line[fd]);
 	if (!line[fd] || *line[fd] == '\0')
-	{
-		ft_free(&line[fd]);
-		return (NULL);
-	}
+		return ft_free(&line[fd]);
 	new_line = ft_re_line(line[fd]);
 	if (!new_line)
-	{
-		ft_free(&line[fd]);
-		return (NULL);
-	}
+		return ft_free(&line[fd]);
 	line[fd] = rest(line[fd]);
 	if (!line[fd])
 		ft_free(&new_line);
 	return (new_line);
-}
-int	main(void)
-{
-	int	fd;
-	fd = open("file.txt", O_CREAT);
-
-	printf("%s", get_next_line(fd));
-
-	int fd1 = open("file1.txt", O_CREAT);
-
-	printf(">>>>>>%zd", read(fd1, NULL, 0));
-
-	// printf("%s", get_next_line(fd1));
-	// printf("----------------------------\n");
-	// printf("%s", get_next_line(fd));
-	// printf("----------------------------\n");
-	// printf("%s", get_next_line(fd));
 }

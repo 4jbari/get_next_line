@@ -10,10 +10,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_free(char **s)
+char *ft_free(char **s)
 {
 	free(*s);
 	*s = NULL;
+	return NULL;
 }
 
 char	*ft_join(char *s1, char *s2)

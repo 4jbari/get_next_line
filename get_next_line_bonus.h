@@ -6,7 +6,7 @@
 /*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:24:41 by ajbari            #+#    #+#             */
-/*   Updated: 2024/02/28 18:23:50 by ajbari           ###   ########.fr       */
+/*   Updated: 2024/02/29 10:36:59 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 char	*get_next_line(int fd);
 int		ft_strlen(char *s);
 char	*ft_join(char *s1, char *s2);
-void	ft_free(char **s);
+char    *ft_free(char **s);
 
 
 #endif
