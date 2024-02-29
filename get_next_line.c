@@ -6,7 +6,7 @@
 /*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:48:58 by ajbari            #+#    #+#             */
-/*   Updated: 2024/02/29 12:50:40 by ajbari           ###   ########.fr       */
+/*   Updated: 2024/02/29 19:45:03 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	ft_read(int fd, char **line)
 		*line = ft_join(*line, buffer);
 	}
 	ft_free(&buffer);
-	return ;
 }
 
 char	*get_next_line(int fd)
@@ -104,65 +103,13 @@ char	*get_next_line(int fd)
 
 	new_line = NULL;
 	if (read(fd, new_line, 0) == -1 || BUFFER_SIZE <= 0)
-	{
-		if (line)
-			ft_free(&line);
-		return (NULL);
-	}
+		return (ft_free(&line));
 	ft_read(fd, &line);
 	if (!line || *line == '\0')
-		return ft_free(&line);
+		return (ft_free(&line));
 	new_line = ft_re_line(line);
 	if (!new_line)
-		return	ft_free(&line);
+		return (ft_free(&line));
 	line = rest(line);
-	if (!line)
-		ft_free(&new_line);
 	return (new_line);
 }
-// int	main(void)
-// {
-
-// 	int fd2 = open("test1.txt", O_RDONLY, 0777);
-// 	printf(">>>>%d\n", fd2);
-	// char *buff = malloc(10);
-	// write(fd2, "aa", 2);
-	// int x = read(7, buff, 5);
-	// printf("%d\n", x);
-
-
-	// printf("%s", get_next_line(fd2));
-	// int fd3 = open("thaha.txt", O_RDONLY, 0777);
-	// printf(">>>>%d\n", fd3);
-	// printf("%s", get_next_line(fd3));
-
-
-	// printf("%s", get_next_line(fd2));
-
-	// int	fd = open("file.txt", O_CREAT, 000);
-
-	// printf("%s", get_next_line(fd));
-
-
-
-
-
-	// char *str = get_next_line(fd);
-	// free(str);
-
-	// system("leaks -q a.out");
-// }
-/* int	main(void)
-{
-	int	fd;
-
-	fd = open("file.txt", O_CREAT | O_RDWR, 0777);
-	printf("%s", get_next_line(fd));
-	close(fd);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	// printf("----------------------------\n");
-	// printf("%s", get_next_line(fd));
-	// printf("----------------------------\n");
-	// printf("%s", get_next_line(fd));
-} */

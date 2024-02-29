@@ -6,7 +6,7 @@
 /*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:49:25 by ajbari            #+#    #+#             */
-/*   Updated: 2024/02/29 12:45:20 by ajbari           ###   ########.fr       */
+/*   Updated: 2024/02/29 19:47:39 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char *ft_free(char **s)
+char	*ft_free(char **s)
 {
 	free(*s);
 	*s = NULL;
-	return NULL;
+	return (NULL);
 }
 
 char	*ft_join(char *s1, char *s2)
@@ -41,7 +41,6 @@ char	*ft_join(char *s1, char *s2)
 	if (!re_line)
 	{
 		ft_free(&s1);
-		// ft_free(&s2);
 		return (NULL);
 	}
 	while (s1 && s1[i])

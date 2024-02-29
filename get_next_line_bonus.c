@@ -6,7 +6,7 @@
 /*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:48:58 by ajbari            #+#    #+#             */
-/*   Updated: 2024/02/29 14:01:03 by ajbari           ###   ########.fr       */
+/*   Updated: 2024/02/29 19:26:01 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_read(int fd, char **line)
 	while (!flag)
 	{
 		bytes_readed = read(fd, buffer, BUFFER_SIZE);
-		if (!bytes_readed || bytes_readed == -1)
+		if (!bytes_readed)
 		{
 			ft_free(&buffer);
 			return ;
@@ -104,17 +104,15 @@ char	*get_next_line(int fd)
 
 	new_line = NULL;
 	if (fd < 0)
-		return NULL;
-	if ( BUFFER_SIZE <= 0 || read(fd, new_line, 0))
-		return ft_free(&line[fd]);
+		return (NULL);
+	if (read(fd, new_line, 0) == -1 || BUFFER_SIZE <= 0)
+		return (ft_free(&line[fd]));
 	ft_read(fd, &line[fd]);
 	if (!line[fd] || *line[fd] == '\0')
-		return ft_free(&line[fd]);
+		return (ft_free(&line[fd]));
 	new_line = ft_re_line(line[fd]);
 	if (!new_line)
-		return ft_free(&line[fd]);
+		return (ft_free(&line[fd]));
 	line[fd] = rest(line[fd]);
-	if (!line[fd])
-		ft_free(&new_line);
 	return (new_line);
 }
